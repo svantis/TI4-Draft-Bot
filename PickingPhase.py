@@ -17,7 +17,8 @@ file_name = f"TI Draft {game_date.strftime('%Y-%m-%d')}.txt"
 # check if the file exists, if not, prompt user to select an existing file
 if not os.path.exists(f"./Drafts/{file_name}"):
     while True:
-        file_name = input("The specified draft document does not exist. Please select an existing draft document: ")
+        game_date = input("The specified draft document does not exist. Please select an existing draft document: ")
+        file_name = f"TI Draft {game_date.strftime('%Y-%m-%d')}.txt"
         if os.path.exists(f"./Drafts/{file_name}"):
             break
         else:

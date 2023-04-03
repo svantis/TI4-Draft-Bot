@@ -17,7 +17,8 @@ file_name = f"TI Draft {game_date.strftime('%Y-%m-%d')}.txt"
 # check if the file exists, if not, prompt user to select an existing file
 if not os.path.exists(f"./Drafts/{file_name}"):
     while True:
-        file_name = input("The specified draft document does not exist. Please select an existing draft document: ")
+        game_date = input("The specified draft document does not exist. Please select an existing draft document: ")
+        file_name = f"TI Draft {game_date.strftime('%Y-%m-%d')}.txt"
         if os.path.exists(f"./Drafts/{file_name}"):
             break
         else:
@@ -70,7 +71,7 @@ with open(f"./Drafts/{file_name}", "r+") as f:
     phase_header = "Banning Phase"
     if phase_header not in draft_text:
         f.seek(0, os.SEEK_END)
-        f.write(f"\n{phase_header}\n")
+        f.write(f"\n{phase_header}\n\n")
     f.seek(0)
     draft_lines = f.readlines()
     for i in range(len(draft_lines)):
@@ -81,7 +82,7 @@ with open(f"./Drafts/{file_name}", "r+") as f:
                 draft_lines[i] = f"Faction banned by player {player_name}: {chosen_faction}\n"
                 break  # overwrite the existing line and exit the loop
     else:
-        draft_lines.append(f"\nFaction banned by player {player_name}: {chosen_faction}")
+        draft_lines.append(f"Faction banned by player {player_name}: {chosen_faction}\n")
         # add new line at the end of the document
     f.seek(0)
     f.writelines(draft_lines)
